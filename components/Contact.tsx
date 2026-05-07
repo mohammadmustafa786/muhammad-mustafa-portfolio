@@ -1,9 +1,40 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, MessageCircle, Send } from "lucide-react";
+import { Mail, MessageCircle, Send, CheckCircle2 } from "lucide-react";
 
 export function Contact() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    
+    const formData = new FormData(e.currentTarget);
+    const name = formData.get('name');
+    const email = formData.get('email');
+    const phone = formData.get('phone');
+    const store = formData.get('store');
+    const budget = formData.get('budget');
+    const message = formData.get('message');
+
+    const body = `Name: ${name}\nEmail: ${email}\nPhone: ${phone || 'N/A'}\nAmazon Store: ${store || 'N/A'}\nMonthly Ad Budget: ${budget}\n\nMessage:\n${message}`;
+
+    // Open user's email client
+    window.location.href = `mailto:mohammad.mustafa260@gmail.com?subject=New Inquiry from ${name} - Amazon PPC&body=${encodeURIComponent(body)}`;
+    
+    setIsSubmitting(false);
+    setIsSubmitted(true);
+    
+    // Reset form
+    e.currentTarget.reset();
+    
+    // Hide success message after 5 seconds
+    setTimeout(() => setIsSubmitted(false), 5000);
+  };
+
   const contacts = [
     {
       label: "Email",
@@ -61,32 +92,32 @@ export function Contact() {
             transition={{ duration: 0.5 }}
             className="bg-background p-8 rounded-3xl shadow-sm border border-card"
           >
-            <form className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <label htmlFor="name" className="text-sm font-semibold text-foreground/80">Full Name *</label>
-                  <input type="text" id="name" required className="w-full px-4 py-3 bg-card border border-card rounded-xl focus:outline-none focus:border-primary/50 transition-colors" placeholder="John Doe" />
+                  <input type="text" id="name" name="name" required className="w-full px-4 py-3 bg-card border border-card rounded-xl focus:outline-none focus:border-primary/50 transition-colors" placeholder="John Doe" />
                 </div>
                 <div className="space-y-2">
                   <label htmlFor="email" className="text-sm font-semibold text-foreground/80">Email *</label>
-                  <input type="email" id="email" required className="w-full px-4 py-3 bg-card border border-card rounded-xl focus:outline-none focus:border-primary/50 transition-colors" placeholder="john@example.com" />
+                  <input type="email" id="email" name="email" required className="w-full px-4 py-3 bg-card border border-card rounded-xl focus:outline-none focus:border-primary/50 transition-colors" placeholder="john@example.com" />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <label htmlFor="phone" className="text-sm font-semibold text-foreground/80">Phone <span className="text-foreground/40 font-normal">(Optional)</span></label>
-                  <input type="tel" id="phone" className="w-full px-4 py-3 bg-card border border-card rounded-xl focus:outline-none focus:border-primary/50 transition-colors" placeholder="+1 234 567 890" />
+                  <input type="tel" id="phone" name="phone" className="w-full px-4 py-3 bg-card border border-card rounded-xl focus:outline-none focus:border-primary/50 transition-colors" placeholder="+1 234 567 890" />
                 </div>
                 <div className="space-y-2">
                   <label htmlFor="store" className="text-sm font-semibold text-foreground/80">Amazon Store URL <span className="text-foreground/40 font-normal">(Optional)</span></label>
-                  <input type="url" id="store" className="w-full px-4 py-3 bg-card border border-card rounded-xl focus:outline-none focus:border-primary/50 transition-colors" placeholder="https://amazon.com/..." />
+                  <input type="url" id="store" name="store" className="w-full px-4 py-3 bg-card border border-card rounded-xl focus:outline-none focus:border-primary/50 transition-colors" placeholder="https://amazon.com/..." />
                 </div>
               </div>
 
               <div className="space-y-2">
                 <label htmlFor="budget" className="text-sm font-semibold text-foreground/80">Monthly Ad Budget *</label>
-                <select id="budget" required defaultValue="" className="w-full px-4 py-3 bg-card border border-card rounded-xl focus:outline-none focus:border-primary/50 transition-colors appearance-none cursor-pointer">
+                <select id="budget" name="budget" required defaultValue="" className="w-full px-4 py-3 bg-card border border-card rounded-xl focus:outline-none focus:border-primary/50 transition-colors appearance-none cursor-pointer">
                   <option value="" disabled>Select an option</option>
                   <option value="under-1k">Under $1K</option>
                   <option value="1k-5k">$1K – $5K</option>
@@ -97,12 +128,20 @@ export function Contact() {
 
               <div className="space-y-2">
                 <label htmlFor="message" className="text-sm font-semibold text-foreground/80">Message *</label>
-                <textarea id="message" required rows={4} className="w-full px-4 py-3 bg-card border border-card rounded-xl focus:outline-none focus:border-primary/50 transition-colors resize-none" placeholder="Tell me about your brand and goals..."></textarea>
+                <textarea id="message" name="message" required rows={4} className="w-full px-4 py-3 bg-card border border-card rounded-xl focus:outline-none focus:border-primary/50 transition-colors resize-none" placeholder="Tell me about your brand and goals..."></textarea>
               </div>
 
-              <button type="submit" className="w-full group flex items-center justify-center gap-2 px-8 py-4 bg-primary text-white rounded-xl font-bold hover:bg-primary/90 transition-all hover:scale-[1.02] shadow-lg shadow-primary/25">
-                Send Message
-                <Send size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+              <button 
+                type="submit" 
+                disabled={isSubmitting}
+                className="w-full group flex items-center justify-center gap-2 px-8 py-4 bg-primary text-white rounded-xl font-bold hover:bg-primary/90 transition-all hover:scale-[1.02] shadow-lg shadow-primary/25 disabled:opacity-70 disabled:hover:scale-100"
+              >
+                {isSubmitting ? 'Opening Email...' : isSubmitted ? 'Message Prepared!' : 'Send Message'}
+                {isSubmitted ? (
+                  <CheckCircle2 size={18} className="text-green-300" />
+                ) : (
+                  <Send size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                )}
               </button>
 
               <p className="text-center text-sm font-medium text-foreground/50 mt-4">

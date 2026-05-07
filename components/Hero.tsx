@@ -105,7 +105,7 @@ export function Hero() {
               Once you add that file, your photo will automatically appear here!
             */}
             <Image
-              src="/profile2.jpeg"
+              src="/profile2.png"
               alt="Muhammad Mustafa Headshot"
               fill
               className="object-cover"

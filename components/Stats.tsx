@@ -37,10 +37,10 @@ function Counter({ value, suffix = "", prefix = "" }: { value: number, suffix?: 
 
 export function Stats() {
   const stats = [
-    { value: 4, suffix: "+", label: "Years Experience" },
+    { value: 5, suffix: "+", label: "Years Experience" },
     { value: 100, suffix: "+", label: "Campaigns Managed" },
     { value: 1, prefix: "$", suffix: "M+", label: "Ad Spend Managed" },
-    { value: 3, label: "Marketplaces (US · UK · UAE)" },
+    { value: 3, label: "Marketplaces (US · UK · Middle East)" },
   ];
 
   return (

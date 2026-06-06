@@ -65,7 +65,7 @@ export function Hero() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-lg md:text-xl text-foreground/70 max-w-2xl mb-10 leading-relaxed mx-auto md:mx-0"
           >
-            Amazon PPC Manager specializing in Sponsored Products, Sponsored Brands & Sponsored Display — across US, UK & UAE marketplaces.
+            Amazon PPC Manager specializing in Sponsored Products, Sponsored Brands & Sponsored Display — across US, UK & Middle East marketplaces.
           </motion.p>
 
           <motion.div

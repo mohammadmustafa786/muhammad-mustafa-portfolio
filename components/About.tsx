@@ -7,7 +7,7 @@ export function About() {
   const quickStats = [
     { label: "4+ Years Experience", icon: Clock },
     { label: "$1M+ Ad Spend Managed", icon: DollarSign },
-    { label: "US · UK · UAE", icon: MapPin },
+    { label: "US · UK · Middle East", icon: MapPin },
   ];
 
   return (
@@ -35,7 +35,7 @@ export function About() {
 
           <div className="space-y-6 text-lg text-foreground/80 leading-relaxed mb-10">
             <p>
-              I&apos;m <strong className="text-foreground">Muhammad Mustafa</strong>, an Amazon PPC Manager with 5+ years of hands-on experience running and scaling Sponsored Products (SP), Sponsored Brands (SB), and Sponsored Display (SD) campaigns across the US, UK, and UAE marketplaces.
+              I&apos;m <strong className="text-foreground">Muhammad Mustafa</strong>, an Amazon PPC Manager with 5+ years of hands-on experience running and scaling Sponsored Products (SP), Sponsored Brands (SB), and Sponsored Display (SD) campaigns across the US, UK, and Middle East marketplaces.
             </p>
             <p>
               I don&apos;t just set up campaigns — I analyze Search Query Reports, dissect placement data, and make bid decisions based on what the numbers actually say. My focus is always the same: eliminate wasted spend, improve organic ranking, and grow revenue without letting ACoS spiral.

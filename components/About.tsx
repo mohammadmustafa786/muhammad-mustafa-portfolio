@@ -5,7 +5,7 @@ import { Download, MessageCircle, MapPin, DollarSign, Clock } from "lucide-react
 
 export function About() {
   const quickStats = [
-    { label: "4+ Years Experience", icon: Clock },
+    { label: "5+ Years Experience", icon: Clock },
     { label: "$1M+ Ad Spend Managed", icon: DollarSign },
     { label: "US · UK · Middle East", icon: MapPin },
   ];
